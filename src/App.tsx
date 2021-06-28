@@ -1,7 +1,7 @@
-import BarabomComponent from "./components/BarabomComponent";
+import BarabomContainer from './containers/BarabomContainer';
 
 function App() {
-  return <BarabomComponent />;
+  return <BarabomContainer />;
 }
 
 export default App;
