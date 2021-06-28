@@ -1,5 +1,8 @@
+import React, { useCallback, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { debounce } from 'underscore';
 import Spotify_Logo from '../assets/logo/Spotify_Logo_RGB_Black.png';
+import TextInput from './TextInput';
 
 export type Props = {
   onSearch: boolean;
@@ -7,17 +10,38 @@ export type Props = {
 };
 
 function SearchForm(props: Props) {
+  const [query, setQuery] = useState<string>('');
+  const queryThrottle = useRef(
+    debounce((q: string) => console.log(`${q}로 지금요청`), 700),
+  );
+
+  const onChange = useCallback(
+    ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+      setQuery(value);
+      if (value.trim() !== '') queryThrottle.current(value);
+    },
+    [],
+  );
+
   return (
-    <SearchBlock on={props.onSearch}>
+    <SearchBlock isOn={props.onSearch}>
       <SearchHeader>
         <img src={Spotify_Logo} alt="Spotify Logo" />
         <span onClick={() => props.changeSearchState(false)}>X</span>
       </SearchHeader>
+      <InputBlock>
+        <TextInput
+          value={query}
+          onChange={onChange}
+          placeholder="Music"
+          block
+        />
+      </InputBlock>
     </SearchBlock>
   );
 }
 
-const SearchBlock = styled.div<{ on?: boolean }>`
+const SearchBlock = styled.div<{ isOn: boolean }>`
   position: absolute;
   bottom: 0;
   left: calc(50% - 235px);
@@ -27,17 +51,24 @@ const SearchBlock = styled.div<{ on?: boolean }>`
   border-radius: 1rem 1rem 0 0;
 
   background: white;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   transform: translateY(500px);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   transition: cubic-bezier(0.24, 0.65, 0.38, 0.88) 0.7s;
 
   overflow-y: scroll;
 
   ${(props) =>
-    props.on &&
+    props.isOn &&
     css`
       transform: translateY(0);
     `}
+`;
+
+const InputBlock = styled.div`
+  width: 100%;
+
+  padding: 0 1.25rem;
+  box-sizing: border-box;
 `;
 
 const SearchHeader = styled.div`
