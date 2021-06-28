@@ -7,3 +7,11 @@ export const SpinAni = keyframes`
         transform: rotateZ(720deg) translateZ(3px);
     }
 `;
+
+export const TitleAni = keyframes`
+    from {
+        transform: translateX(300%);
+    } to {
+        transform: translateX(-200%);
+    }
+`;

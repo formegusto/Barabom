@@ -1,7 +1,8 @@
 import { Ref } from 'react';
 import styled from 'styled-components';
 import Spotify from '../assets/icon/Spotify_Icon.png';
-import { SpinAni } from '../lib/animations/CDanimations';
+import { SpinAni, TitleAni } from '../lib/animations/CDanimations';
+import musicutils from '../lib/musicutils';
 import { Item } from '../types/track';
 
 export type Props = {
@@ -14,6 +15,12 @@ function CDPlayer(props: Props) {
   return (
     <CDPStage className="cdp">
       <CDPBlock>
+        {props.item && (
+          <TrackTitleBlock>
+            <TrackTitle>{musicutils.getMusicAritst(props.item)}</TrackTitle>
+          </TrackTitleBlock>
+        )}
+
         <CDPTop className="realtop" />
         <CDPFront className="top">
           <CDTable onClick={() => props.changeSearchState(true)}>
@@ -38,6 +45,26 @@ function CDPlayer(props: Props) {
     </CDPStage>
   );
 }
+
+const TrackTitleBlock = styled.div`
+  position: absolute;
+  top: 0;
+  left: calc(50% - 40px);
+  width: 80px;
+  overflow-x: hidden;
+
+  transform: translateY(-15px);
+
+  transform-style: preserve-3d;
+`;
+
+const TrackTitle = styled.h1`
+  font-size: 10px;
+  animation: ${TitleAni} 10.5s infinite linear;
+  text-align: end;
+
+  white-space: nowrap;
+`;
 
 const AlbumArt = styled.img`
   width: 100%;
