@@ -12,11 +12,15 @@ function BarabomComponent(props: Props) {
     <BarabomBlock>
       <BarabomShadow />
       <CDPZone>
-        <CDPlayer changeSearchState={props.changeSearchState} />
+        <CDPlayer
+          changeSearchState={props.changeSearchState}
+          item={props.item}
+        />
       </CDPZone>
       <SearchForm
         onSearch={props.onSearch}
         changeSearchState={props.changeSearchState}
+        selectPlayItem={props.selectPlayItem}
       />
     </BarabomBlock>
   );

@@ -4,13 +4,14 @@ import ListItem from './ListItem';
 
 type Props = {
   items?: Item[];
+  selectPlayItem: (item: Item) => void;
 };
 
-function TrackList({ items }: Props) {
+function TrackList({ items, selectPlayItem }: Props) {
   return (
     <TrackListBlock>
       {items?.map((item, idx) => (
-        <ListItem key={idx} item={item} />
+        <ListItem key={idx} item={item} selectPlayItem={selectPlayItem} />
       ))}
     </TrackListBlock>
   );

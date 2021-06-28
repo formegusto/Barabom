@@ -4,12 +4,14 @@ import styled, { css } from 'styled-components';
 import { debounce } from 'underscore';
 import Spotify_Logo from '../assets/logo/Spotify_Logo_RGB_Black.png';
 import SpotifyConnector from '../stores/spotify/connector';
+import { Item } from '../types/track';
 import TextInput from './TextInput';
 import TrackList from './TrackList';
 
 export type Props = {
   onSearch: boolean;
   changeSearchState: (state: boolean) => void;
+  selectPlayItem: (item: Item) => void;
 };
 
 function SearchForm({
@@ -17,14 +19,14 @@ function SearchForm({
   changeSearchState,
   getTracks,
   tracks,
+  selectPlayItem,
 }: Props & ConnectedProps<typeof SpotifyConnector>) {
   const [query, setQuery] = useState<string>('');
   const queryThrottle = useRef(
     debounce((q: string) => {
-      const query = q.trim();
-      if (query !== '') {
-        console.log(`${query}로 지금요청`);
-        getTracks(query);
+      if (q !== '') {
+        console.log(`${q}로 지금요청`);
+        getTracks(q);
       } else {
         console.log('요청 안합니다.');
       }
@@ -58,7 +60,7 @@ function SearchForm({
           block
         />
       </InputBlock>
-      <TrackList items={tracks?.items} />
+      <TrackList items={tracks?.items} selectPlayItem={selectPlayItem} />
     </SearchBlock>
   );
 }

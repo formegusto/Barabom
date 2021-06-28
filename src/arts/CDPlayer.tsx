@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import Spotify from '../assets/icon/Spotify_Icon.png';
+import { Item } from '../types/track';
 
 export type Props = {
   changeSearchState: (state: boolean) => void;
+  item: Item | null;
 };
 
 function CDPlayer(props: Props) {
@@ -14,7 +16,10 @@ function CDPlayer(props: Props) {
           <CDTable onClick={() => props.changeSearchState(true)}>
             <CDPin />
             <CD>
-              <AlbumArt src={Spotify} alt="AlbumArt" />
+              <AlbumArt
+                src={props.item ? props.item.album.images[0].url : Spotify}
+                alt="AlbumArt"
+              />
             </CD>
             <CDShadow />
           </CDTable>
@@ -166,6 +171,8 @@ const CD = styled.div`
   transform: translateZ(3px);
 
   background: white;
+
+  overflow: hidden;
 `;
 
 const CDShadow = styled.div`

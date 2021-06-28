@@ -5,11 +5,12 @@ import timeutils from '../lib/timeutils';
 
 type Props = {
   item: Item;
+  selectPlayItem: (item: Item) => void;
 };
 
-function ListItem({ item }: Props) {
+function ListItem({ item, selectPlayItem }: Props) {
   return (
-    <ListBlock>
+    <ListBlock onClick={() => selectPlayItem(item)}>
       <img
         className="albumart"
         src={item.album.images[0].url}
