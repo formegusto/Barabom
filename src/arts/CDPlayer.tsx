@@ -3,6 +3,7 @@ import styled from "styled-components";
 function CDPlayer() {
     return <CDPStage>
         <CDPBlock>
+            <CDPTop className="realtop"/>
             <CDPFront className="top">
                 <CDTable>
                     <CDPin/>
@@ -11,10 +12,53 @@ function CDPlayer() {
                 </CDTable>
             </CDPFront>
             <CDPBack className="top"/>
-            <CDPBottom className="bottom"/>
+            <CDPBottom className="bottom">
+                <CDPStick>
+                    <CDPStickFront />
+                    <CDPStickLeft />
+                </CDPStick>
+            </CDPBottom>
         </CDPBlock>
     </CDPStage>;
 }
+
+const CDPStickLeft = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10px;
+    width: 1000px;
+
+    border: 1px solid #999;
+    transform: rotateY(-90deg);
+    transform-origin: 0% 50%;
+
+    background: #999;
+`;
+
+const CDPStickFront = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1000px;
+    width: 10px;
+
+    border: 1px solid #999;
+
+    transform: rotateX(90deg);
+    transform-origin: 50% 0%;
+
+    background: #CCC;
+`;
+
+const CDPStick = styled.div`
+    position: relative;
+
+    width: 10px;
+    height: 10px;
+
+    transform-style: preserve-3d;
+`;
 
 const CDPStage = styled.div`
     perspective: 1000px;   
@@ -36,24 +80,47 @@ const CDPBlock = styled.div`
 
     & > .top {
         top: 0;
-        left:0;
+        left: 0;
+    }
+
+    & > .realtop {
+        top: 0;
+        right: calc(50% - 45px);
     }
 
     & > .bottom {
         bottom: 0;
-        left: 0;
+        right: calc(50% - 45px);
     }
     transform: rotateY(20deg);
 
     transform-style: preserve-3d;
 `;
 
+const CDPTop = styled.div`
+    width: 90px;
+    height: 30px;
+
+    transform-origin: 50% 50%;
+    transform: rotateX(-90deg) translateZ(-15px);
+
+    background-color: #333;
+`;
+
 const CDPBottom = styled.div`
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 90px;
     height: 30px;
 
     transform-origin: 50% 50%;
     transform: rotateX(-90deg) translateZ(15px);
+
+    background-color: #333;
+
+    transform-style: preserve-3d;
 `;
 
 const CDPin = styled.div`
@@ -136,10 +203,12 @@ const CDPBack = styled.div`
     width: 100%;
     height: 100%;
 
-    border: 1px solid black;
+    border: 1px solid #333;
     border-radius: .5rem;
 
     transform: translateZ(-15px);
+
+    background: #333;
 `;
 
 export default CDPlayer;
