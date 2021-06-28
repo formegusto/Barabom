@@ -1,10 +1,13 @@
+import { Ref } from 'react';
 import styled from 'styled-components';
 import Spotify from '../assets/icon/Spotify_Icon.png';
+import { SpinAni } from '../lib/animations/CDanimations';
 import { Item } from '../types/track';
 
 export type Props = {
   changeSearchState: (state: boolean) => void;
   item: Item | null;
+  refCD: Ref<HTMLDivElement>;
 };
 
 function CDPlayer(props: Props) {
@@ -15,7 +18,7 @@ function CDPlayer(props: Props) {
         <CDPFront className="top">
           <CDTable onClick={() => props.changeSearchState(true)}>
             <CDPin />
-            <CD>
+            <CD ref={props.refCD}>
               <AlbumArt
                 src={props.item ? props.item.album.images[0].url : Spotify}
                 alt="AlbumArt"
@@ -173,6 +176,10 @@ const CD = styled.div`
   background: white;
 
   overflow: hidden;
+
+  &.play {
+    animation: ${SpinAni} 1.5s infinite linear;
+  }
 `;
 
 const CDShadow = styled.div`

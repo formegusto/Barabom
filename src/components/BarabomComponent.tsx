@@ -15,6 +15,7 @@ function BarabomComponent(props: Props) {
         <CDPlayer
           changeSearchState={props.changeSearchState}
           item={props.item}
+          refCD={props.refCD}
         />
       </CDPZone>
       <SearchForm
