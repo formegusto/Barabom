@@ -4,35 +4,46 @@ import { debounce } from 'underscore';
 import { getTracks } from '../api/spotify';
 import Spotify_Logo from '../assets/logo/Spotify_Logo_RGB_Black.png';
 import TextInput from './TextInput';
+import TrackList from './TrackList';
 
 export type Props = {
   onSearch: boolean;
   changeSearchState: (state: boolean) => void;
 };
 
-function SearchForm(props: Props) {
+function SearchForm({ onSearch, changeSearchState }: Props) {
   const [query, setQuery] = useState<string>('');
   const queryThrottle = useRef(
     debounce(async (q: string) => {
-      console.log(`${q}로 지금요청`);
-      const response = await getTracks(q);
-      console.log(response);
-    }, 700),
+      const query = q.trim();
+      if (query !== '') {
+        console.log(`${query}로 지금요청`);
+        const response = await getTracks(q);
+        console.log(response.data);
+      } else {
+        console.log('요청 안합니다.');
+      }
+    }, 1000),
   );
 
   const onChange = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
       setQuery(value);
-      if (value.trim() !== '') queryThrottle.current(value);
+      queryThrottle.current(value);
     },
     [],
   );
 
+  const onClose = useCallback(() => {
+    setQuery('');
+    changeSearchState(false);
+  }, [changeSearchState]);
+
   return (
-    <SearchBlock isOn={props.onSearch}>
+    <SearchBlock isOn={onSearch}>
       <SearchHeader>
         <img src={Spotify_Logo} alt="Spotify Logo" />
-        <span onClick={() => props.changeSearchState(false)}>X</span>
+        <span onClick={onClose}>X</span>
       </SearchHeader>
       <InputBlock>
         <TextInput
@@ -42,11 +53,15 @@ function SearchForm(props: Props) {
           block
         />
       </InputBlock>
+      <TrackList />
     </SearchBlock>
   );
 }
 
 const SearchBlock = styled.div<{ isOn: boolean }>`
+  display: flex;
+  flex-flow: column;
+
   position: absolute;
   bottom: 0;
   left: calc(50% - 235px);
@@ -60,12 +75,10 @@ const SearchBlock = styled.div<{ isOn: boolean }>`
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   transition: cubic-bezier(0.24, 0.65, 0.38, 0.88) 0.7s;
 
-  overflow-y: scroll;
-
   ${(props) =>
     props.isOn &&
     css`
-      transform: translateY(0);
+      transform: translateY(10px);
     `}
 `;
 

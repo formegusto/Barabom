@@ -1,22 +1,16 @@
-import axios from 'axios';
+import client from './client';
 import qs from 'qs';
-
-const APPKEY = process.env.REACT_APP_SPOTIFY_KEY;
+import Track from '../types/track';
 
 const getTracks = (q: string) =>
-  axios.get<any>(
-    `https://api.spotify.com/v1/search?${qs.stringify({
+  client.get<Track>(
+    `/v1/search?${qs.stringify({
       query: q,
       type: 'track',
       market: 'KR',
       limit: 10,
-      offset: 5,
+      offset: 1,
     })}`,
-    {
-      headers: {
-        Authorization: `Bearer ${APPKEY}`,
-      },
-    },
   );
 
 export { getTracks };
