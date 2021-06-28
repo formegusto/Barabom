@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
+import { ConnectedProps } from 'react-redux';
 import BarabomContainer from './containers/BarabomContainer';
+import SpotifyConnector from './stores/spotify/connector';
 
-function App() {
+function App({ injectPlayer }: ConnectedProps<typeof SpotifyConnector>) {
   useEffect(() => {
     (window as any).onSpotifyWebPlaybackSDKReady = () => {
       const token = `${process.env.REACT_APP_SPOTIFY_KEY}`;
@@ -20,14 +22,17 @@ function App() {
       // Ready
       player.addListener('ready', ({ device_id }: any) => {
         console.log('Ready with Device ID', device_id);
+
+        player.device_id = device_id;
+        injectPlayer(player);
       });
 
       // Connect to the player!
       player.connect();
     };
-  }, []);
+  }, [injectPlayer]);
 
   return <BarabomContainer />;
 }
 
-export default App;
+export default SpotifyConnector(App);
