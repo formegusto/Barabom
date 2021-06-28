@@ -5,6 +5,6 @@ const RootReducer = combineReducers({
   SpotifyReducer,
 });
 
-export type RootStore = typeof RootReducer;
+export type RootStore = ReturnType<typeof RootReducer>;
 
 export default RootReducer;

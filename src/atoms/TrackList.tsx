@@ -1,11 +1,16 @@
 import styled from 'styled-components';
+import { Item } from '../types/track';
 import ListItem from './ListItem';
 
-function TrackList() {
+type Props = {
+  items?: Item[];
+};
+
+function TrackList({ items }: Props) {
   return (
     <TrackListBlock>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num, idx) => (
-        <ListItem key={idx} />
+      {items?.map((item, idx) => (
+        <ListItem key={idx} item={item} />
       ))}
     </TrackListBlock>
   );

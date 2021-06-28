@@ -16,6 +16,7 @@ function SearchForm({
   onSearch,
   changeSearchState,
   getTracks,
+  tracks,
 }: Props & ConnectedProps<typeof SpotifyConnector>) {
   const [query, setQuery] = useState<string>('');
   const queryThrottle = useRef(
@@ -57,7 +58,7 @@ function SearchForm({
           block
         />
       </InputBlock>
-      <TrackList />
+      <TrackList items={tracks?.items} />
     </SearchBlock>
   );
 }

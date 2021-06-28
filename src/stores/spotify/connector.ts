@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { SpotifyStore } from '.';
+import { RootStore } from '..';
 import * as SpotifyActions from './actions';
 
-const mapState = (spotifyStore: SpotifyStore) => ({
-  ...spotifyStore,
+const mapState = ({ SpotifyReducer }: RootStore) => ({
+  ...SpotifyReducer,
 });
 
 const SpotifyConnector = connect(mapState, SpotifyActions);
