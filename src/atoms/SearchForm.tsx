@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { debounce } from 'underscore';
+import { getTracks } from '../api/spotify';
 import Spotify_Logo from '../assets/logo/Spotify_Logo_RGB_Black.png';
 import TextInput from './TextInput';
 
@@ -12,7 +13,11 @@ export type Props = {
 function SearchForm(props: Props) {
   const [query, setQuery] = useState<string>('');
   const queryThrottle = useRef(
-    debounce((q: string) => console.log(`${q}로 지금요청`), 700),
+    debounce(async (q: string) => {
+      console.log(`${q}로 지금요청`);
+      const response = await getTracks(q);
+      console.log(response);
+    }, 700),
   );
 
   const onChange = useCallback(
