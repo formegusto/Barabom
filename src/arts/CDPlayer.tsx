@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Spotify from '../assets/icon/Spotify_icon.png';
 
 function CDPlayer() {
     return <CDPStage>
@@ -7,7 +8,9 @@ function CDPlayer() {
             <CDPFront className="top">
                 <CDTable>
                     <CDPin/>
-                    <CD/>
+                    <CD>
+                        <AlbumArt src={Spotify} alt="AlbumArt" />
+                    </CD>
                     <CDShadow />
                 </CDTable>
             </CDPFront>
@@ -21,6 +24,13 @@ function CDPlayer() {
         </CDPBlock>
     </CDPStage>;
 }
+
+const AlbumArt = styled.img`
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+`;
 
 const CDPStickLeft = styled.div`
     position: absolute;
