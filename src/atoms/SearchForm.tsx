@@ -1,8 +1,9 @@
 import React, { useCallback, useRef, useState } from 'react';
+import { ConnectedProps } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { debounce } from 'underscore';
-import { getTracks } from '../api/spotify';
 import Spotify_Logo from '../assets/logo/Spotify_Logo_RGB_Black.png';
+import SpotifyConnector from '../stores/spotify/connector';
 import TextInput from './TextInput';
 import TrackList from './TrackList';
 
@@ -11,15 +12,18 @@ export type Props = {
   changeSearchState: (state: boolean) => void;
 };
 
-function SearchForm({ onSearch, changeSearchState }: Props) {
+function SearchForm({
+  onSearch,
+  changeSearchState,
+  getTracks,
+}: Props & ConnectedProps<typeof SpotifyConnector>) {
   const [query, setQuery] = useState<string>('');
   const queryThrottle = useRef(
-    debounce(async (q: string) => {
+    debounce((q: string) => {
       const query = q.trim();
       if (query !== '') {
         console.log(`${query}로 지금요청`);
-        const response = await getTracks(q);
-        console.log(response.data);
+        getTracks(query);
       } else {
         console.log('요청 안합니다.');
       }
@@ -122,4 +126,4 @@ const SearchHeader = styled.div`
   }
 `;
 
-export default SearchForm;
+export default SpotifyConnector(SearchForm);
