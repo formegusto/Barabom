@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { debounce } from 'underscore';
 import Spotify_Logo from '../assets/logo/Spotify_Logo_RGB_Black.png';
 import SpotifyConnector from '../stores/spotify/connector';
+import { GET_TRACKS } from '../stores/spotify/types';
 import { Item } from '../types/track';
 import TextInput from './TextInput';
 import TrackList from './TrackList';
@@ -20,6 +21,7 @@ function SearchForm({
   getTracks,
   tracks,
   selectPlayItem,
+  loading,
 }: Props & ConnectedProps<typeof SpotifyConnector>) {
   const [query, setQuery] = useState<string>('');
   const queryThrottle = useRef(
@@ -60,7 +62,11 @@ function SearchForm({
           block
         />
       </InputBlock>
-      <TrackList items={tracks?.items} selectPlayItem={selectPlayItem} />
+      <TrackList
+        items={tracks?.items}
+        selectPlayItem={selectPlayItem}
+        loading={loading[GET_TRACKS]}
+      />
     </SearchBlock>
   );
 }

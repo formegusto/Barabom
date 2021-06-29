@@ -1,6 +1,7 @@
 import { call, put } from '@redux-saga/core/effects';
 import { AxiosResponse } from 'axios';
 import { Action } from 'redux';
+import { finishLoading, startLoading } from '../stores/loading/actions';
 
 interface SagaAction<Payload = any> extends Action<string> {
   payload: Payload;
@@ -15,6 +16,7 @@ export default function createRequestSaga<P = any, AR = any>(
   const FAILURE = `${type}/failure`;
 
   return function* (action: SagaAction<P>) {
+    yield put(startLoading(type));
     try {
       const response: AxiosResponse<AR> = yield call(request, action.payload);
       yield put<SagaAction<AR>>({
@@ -28,5 +30,6 @@ export default function createRequestSaga<P = any, AR = any>(
         error: true,
       });
     }
+    yield put(finishLoading(type));
   };
 }
