@@ -1,6 +1,11 @@
 import { handleActions } from 'redux-actions';
 import Track, { Tracks } from '../../types/track';
-import { GET_TRACKS_FAILURE, GET_TRACKS_SUCCESS, INJECT_PLAYER } from './types';
+import {
+  GET_TRACKS_APPEND_SUCCESS,
+  GET_TRACKS_FAILURE,
+  GET_TRACKS_SUCCESS,
+  INJECT_PLAYER,
+} from './types';
 import produce from 'immer';
 
 export type SpotifyStore = {
@@ -21,9 +26,13 @@ const SpotifyReducer = handleActions<SpotifyStore, Payload>(
       produce(state, (draft) => {
         draft.player = action.payload;
       }),
+    [GET_TRACKS_APPEND_SUCCESS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.tracks?.items.push(...action.payload.tracks.items);
+      }),
     [GET_TRACKS_SUCCESS]: (state, action) =>
       produce(state, (draft) => {
-        draft.tracks = action.payload!.tracks;
+        draft.tracks = action.payload.tracks;
       }),
     [GET_TRACKS_FAILURE]: (state) =>
       produce(state, (draft) => {

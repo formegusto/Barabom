@@ -1,3 +1,4 @@
+import { Ref } from 'react';
 import styled from 'styled-components';
 import { Item } from '../types/track';
 import ListItem from './ListItem';
@@ -7,19 +8,20 @@ type Props = {
   items?: Item[];
   selectPlayItem: (item: Item) => void;
   loading?: boolean;
+  refList: Ref<HTMLDivElement>;
 };
 
-function TrackList({ items, selectPlayItem, loading }: Props) {
+function TrackList({ items, selectPlayItem, loading, refList }: Props) {
   return (
-    <TrackListBlock>
+    <TrackListBlock ref={refList}>
+      {items?.map((item, idx) => (
+        <ListItem key={idx} item={item} selectPlayItem={selectPlayItem} />
+      ))}
       {loading && (
         <LoadingBlock>
           <Spinner />
         </LoadingBlock>
       )}
-      {items?.map((item, idx) => (
-        <ListItem key={idx} item={item} selectPlayItem={selectPlayItem} />
-      ))}
     </TrackListBlock>
   );
 }

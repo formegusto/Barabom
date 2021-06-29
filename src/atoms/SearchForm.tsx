@@ -1,10 +1,10 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ConnectedProps } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { debounce } from 'underscore';
 import Spotify_Logo from '../assets/logo/Spotify_Logo_RGB_Black.png';
 import SpotifyConnector from '../stores/spotify/connector';
-import { GET_TRACKS } from '../stores/spotify/types';
+import { GET_TRACKS, GET_TRACKS_APPEND } from '../stores/spotify/types';
 import { Item } from '../types/track';
 import TextInput from './TextInput';
 import TrackList from './TrackList';
@@ -19,11 +19,14 @@ function SearchForm({
   onSearch,
   changeSearchState,
   getTracks,
+  appendTracks,
   tracks,
   selectPlayItem,
   loading,
 }: Props & ConnectedProps<typeof SpotifyConnector>) {
   const [query, setQuery] = useState<string>('');
+  const refList = useRef<HTMLDivElement>(null);
+
   const queryThrottle = useRef(
     debounce((q: string) => {
       if (q !== '') {
@@ -48,6 +51,24 @@ function SearchForm({
     changeSearchState(false);
   }, [changeSearchState]);
 
+  useEffect(() => {
+    if (refList.current)
+      refList.current.addEventListener(
+        'scroll',
+        debounce(function (this) {
+          console.log('offsetHeight', this.clientHeight);
+          console.log('scrollTop', this.scrollTop);
+
+          if (this.scrollTop >= this.clientHeight) {
+            appendTracks({
+              q: '아이유',
+              offset: 2,
+            });
+          }
+        }, 500),
+      );
+  }, [appendTracks]);
+
   return (
     <SearchBlock isOn={onSearch}>
       <SearchHeader>
@@ -65,7 +86,8 @@ function SearchForm({
       <TrackList
         items={tracks?.items}
         selectPlayItem={selectPlayItem}
-        loading={loading[GET_TRACKS]}
+        loading={loading[GET_TRACKS] || loading[GET_TRACKS_APPEND]}
+        refList={refList}
       />
     </SearchBlock>
   );
