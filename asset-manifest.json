@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/barabom/static/css/main.7639a7c8.chunk.css",
+    "main.js": "/barabom/static/js/main.b63f8ac1.chunk.js",
+    "main.js.map": "/barabom/static/js/main.b63f8ac1.chunk.js.map",
+    "runtime-main.js": "/barabom/static/js/runtime-main.5a2d1974.js",
+    "runtime-main.js.map": "/barabom/static/js/runtime-main.5a2d1974.js.map",
+    "static/js/2.8cddfb85.chunk.js": "/barabom/static/js/2.8cddfb85.chunk.js",
+    "static/js/2.8cddfb85.chunk.js.map": "/barabom/static/js/2.8cddfb85.chunk.js.map",
+    "static/js/3.7fadec2d.chunk.js": "/barabom/static/js/3.7fadec2d.chunk.js",
+    "static/js/3.7fadec2d.chunk.js.map": "/barabom/static/js/3.7fadec2d.chunk.js.map",
+    "index.html": "/barabom/index.html",
+    "static/css/main.7639a7c8.chunk.css.map": "/barabom/static/css/main.7639a7c8.chunk.css.map",
+    "static/js/2.8cddfb85.chunk.js.LICENSE.txt": "/barabom/static/js/2.8cddfb85.chunk.js.LICENSE.txt",
+    "static/media/Spotify_Icon.0e932c0a.png": "/barabom/static/media/Spotify_Icon.0e932c0a.png",
+    "static/media/Spotify_Logo_RGB_Black.0d1e5545.png": "/barabom/static/media/Spotify_Logo_RGB_Black.0d1e5545.png",
+    "static/media/keonu.12f6d4e1.jpg": "/barabom/static/media/keonu.12f6d4e1.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5a2d1974.js",
+    "static/js/2.8cddfb85.chunk.js",
+    "static/css/main.7639a7c8.chunk.css",
+    "static/js/main.b63f8ac1.chunk.js"
+  ]
+}
