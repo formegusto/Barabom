@@ -8,6 +8,7 @@ import { GET_TRACKS, GET_TRACKS_APPEND } from '../stores/spotify/types';
 import { Item } from '../types/track';
 import TextInput from './TextInput';
 import TrackList from './TrackList';
+import qs from 'qs';
 
 export type Props = {
   onSearch: boolean;
@@ -32,6 +33,10 @@ function SearchForm({
       if (q !== '') {
         console.log(`${q}로 지금요청`);
         getTracks(q);
+        if (refList.current)
+          refList.current.scrollTo({
+            top: 0,
+          });
       } else {
         console.log('요청 안합니다.');
       }
@@ -51,23 +56,36 @@ function SearchForm({
     changeSearchState(false);
   }, [changeSearchState]);
 
-  useEffect(() => {
-    if (refList.current)
-      refList.current.addEventListener(
-        'scroll',
-        debounce(function (this) {
-          console.log('offsetHeight', this.clientHeight);
-          console.log('scrollTop', this.scrollTop);
+  const nextQuery = useCallback(
+    function (this: HTMLDivElement) {
+      console.log('next Query', tracks);
+      if (this.scrollTop >= this.scrollHeight - this.offsetHeight) {
+        if (tracks?.next) {
+          const nextObj = qs.parse(tracks.next.split('?')[1]) as any;
+          appendTracks({
+            q: nextObj.query,
+            offset: nextObj.offset,
+          });
+        }
+      }
+    },
+    [tracks, appendTracks],
+  );
 
-          if (this.scrollTop >= this.clientHeight) {
-            appendTracks({
-              q: '아이유',
-              offset: 2,
-            });
-          }
-        }, 500),
-      );
-  }, [appendTracks]);
+  const debounceNextQuery = useRef(debounce(nextQuery, 500));
+
+  const injectEventListener = useCallback(() => {
+    if (refList.current)
+      refList.current.removeEventListener('scroll', debounceNextQuery.current);
+    if (refList.current) {
+      debounceNextQuery.current = debounce(nextQuery, 500);
+      refList.current.addEventListener('scroll', debounceNextQuery.current);
+    }
+  }, [nextQuery]);
+
+  useEffect(() => {
+    injectEventListener();
+  }, [injectEventListener]);
 
   return (
     <SearchBlock isOn={onSearch}>

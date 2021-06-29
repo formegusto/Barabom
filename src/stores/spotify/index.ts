@@ -28,7 +28,10 @@ const SpotifyReducer = handleActions<SpotifyStore, Payload>(
       }),
     [GET_TRACKS_APPEND_SUCCESS]: (state, action) =>
       produce(state, (draft) => {
-        draft.tracks?.items.push(...action.payload.tracks.items);
+        draft.tracks = {
+          ...action.payload.tracks,
+          items: draft.tracks?.items.concat(action.payload.tracks.items),
+        };
       }),
     [GET_TRACKS_SUCCESS]: (state, action) =>
       produce(state, (draft) => {
