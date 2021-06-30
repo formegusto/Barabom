@@ -1,6 +1,6 @@
 import { Ref } from 'react';
 import styled from 'styled-components';
-import Spotify from '../assets/icon/Spotify_Icon.png';
+import Spotify from '../assets/icon/Spotify_icon.png';
 import { SpinAni, TitleAni } from '../lib/animations/CDanimations';
 import musicutils from '../lib/musicutils';
 import { Item } from '../types/track';

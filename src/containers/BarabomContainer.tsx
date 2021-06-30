@@ -13,6 +13,7 @@ function BarabomContainer({
 }: ConnectedProps<typeof SpotifyConnector>) {
   const [onSearch, setOnSearch] = useState<boolean>(false);
   const [playItem, setPlayItem] = useState<Item | null>(null);
+  const [lyrics, setLyrics] = useState<string>('');
   const refCD = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -58,7 +59,7 @@ function BarabomContainer({
       setOnSearch(false);
       setPlayItem(item);
 
-      const check = await getLyrics(item.artists[0].name, item.name);
+      let check = await getLyrics(item.artists[0].name, item.name);
       console.log(check);
       if (check.length === 0) {
         const response = await getAliases(item.artists[0].name);
@@ -66,9 +67,15 @@ function BarabomContainer({
         const { aliases } = response.data.artists[0];
 
         for (const aliase of aliases) {
-          const response = await getLyrics(aliase['sort-name'], item.name);
-          console.log(response);
+          check = await getLyrics(aliase['sort-name'], item.name);
+          console.log(check);
+          if (check.hasOwnProperty('lyrics')) {
+            setLyrics(check.lyrics.lyrics_body.replaceAll('\n', '<br/>'));
+            break;
+          }
         }
+      } else {
+        setLyrics(check.lyrics.lyrics_body.replaceAll('\n', '<br/>'));
       }
 
       play({ spotify_uri: item.uri, device_id: player.device_id });
@@ -83,6 +90,7 @@ function BarabomContainer({
       item={playItem}
       selectPlayItem={selectPlayItem}
       refCD={refCD}
+      lyrics={lyrics}
     />
   );
 }

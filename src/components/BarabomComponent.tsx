@@ -4,8 +4,12 @@ import keonu from '../assets/keonu.jpg';
 import SearchForm from '../atoms/SearchForm';
 import { Props as SearchProps } from '../atoms/SearchForm';
 import { Props as CDPlayProps } from '../arts/CDPlayer';
+import Lyrics from '../atoms/Lyrics';
 
-type Props = SearchProps & CDPlayProps;
+type Props = SearchProps &
+  CDPlayProps & {
+    lyrics: string;
+  };
 
 function BarabomComponent(props: Props) {
   return (
@@ -33,6 +37,7 @@ function BarabomComponent(props: Props) {
             changeSearchState={props.changeSearchState}
             selectPlayItem={props.selectPlayItem}
           />
+          <Lyrics lyrics={props.lyrics} />
         </BarabomBlock>
       </BarabomWrap>
       <ComfortBlock className="right">

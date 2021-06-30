@@ -119,6 +119,8 @@ const SearchBlock = styled.div<{ isOn: boolean }>`
   bottom: 0;
   left: calc(50% - 235px);
 
+  z-index: 255;
+
   width: 470px;
   height: 470px;
   border-radius: 1rem 1rem 0 0;
