@@ -27,8 +27,9 @@ const Input = styled.input<StyleProps>`
 
   color: #666;
   box-sizing: border-box;
-  border-radius: 1rem;
+  border-radius: 2rem;
   border: 1px solid #ccc;
+  outline: none;
 
   &::placeholder {
     color: #eee;
