@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ConnectedProps } from 'react-redux';
+import { getAliases } from '../api/musicbrainz';
 import BarabomComponent from '../components/BarabomComponent';
 import SpotifyConnector from '../stores/spotify/connector';
 import { Item } from '../types/track';
@@ -52,9 +53,16 @@ function BarabomContainer({
   }, []);
 
   const selectPlayItem = useCallback(
-    (item: Item) => {
+    async (item: Item) => {
       setOnSearch(false);
       setPlayItem(item);
+      const response = await getAliases(item.artists[0].name);
+      const { aliases } = response.data.artists[0];
+
+      for (const aliase of aliases) {
+        console.log(aliase);
+      }
+
       play({ spotify_uri: item.uri, device_id: player.device_id });
     },
     [play, player],
