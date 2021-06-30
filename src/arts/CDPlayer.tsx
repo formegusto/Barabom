@@ -119,6 +119,8 @@ const CDPStick = styled.div`
 `;
 
 const CDPStage = styled.div`
+  position: relative;
+  z-index: 13;
   perspective: 1000px;
 `;
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import CDPlayer from '../arts/CDPlayer';
 import keonu from '../assets/keonu.jpg';
 import SearchForm from '../atoms/SearchForm';
@@ -48,6 +48,26 @@ function BarabomComponent(props: Props) {
   );
 }
 
+const leftLineAni = keyframes`
+  from {
+    opacity:0;
+    /* transform: rotateZ(-90deg); */
+  } to {
+    opacity:1;
+    /* transform: rotateZ(0deg); */
+  }
+`;
+
+const rightLineAni = keyframes`
+  from {
+    opacity:0;
+    transform: rotateZ(-90deg);
+  } to {
+    opacity: 1;
+    transform: rotateZ(0deg);
+  }
+`;
+
 const Wrap = styled.div`
   display: flex;
   flex-direction: row;
@@ -68,6 +88,8 @@ const Comfort = styled.h2`
 `;
 
 const ComfortBlock = styled.div`
+  position: relative;
+  z-index: 10;
   width: 500px;
   height: 500px;
 
@@ -86,6 +108,12 @@ const ComfortBlock = styled.div`
       line-height: 78px;
       text-align: right;
     }
+
+    ${css`
+      transform-origin: 100% 0%;
+      transform: translateX(484px);
+      /* animation: ${leftLineAni} 0.7s linear forwards; */
+    `}
   }
 
   &.right {
@@ -94,7 +122,16 @@ const ComfortBlock = styled.div`
     & > h2 {
       font-size: 48px;
       line-height: 59px;
+
+      padding: 0.5rem;
+      color: #999999;
     }
+
+    ${css`
+      transform-origin: 0% 100%;
+      transform: rotateZ(-90deg);
+      /* animation: ${rightLineAni} 0.7s linear forwards; */
+    `}
   }
 `;
 

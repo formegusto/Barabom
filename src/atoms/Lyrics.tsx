@@ -14,7 +14,7 @@ function Lyrics(props: Props) {
 
 const LyricsWrap = styled.div`
   position: relative;
-  z-index: 3;
+  z-index: 13;
 
   flex: 1;
 
@@ -32,7 +32,7 @@ const LyricsBlock = styled.div`
 
   font-size: 12px;
   line-height: 16px;
-  color: #000;
+  color: #fff;
 
   text-shadow: 1px 1px 10px #333;
   &::-webkit-scrollbar {
