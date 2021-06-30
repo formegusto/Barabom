@@ -37,7 +37,7 @@ function BarabomComponent(props: Props) {
             changeSearchState={props.changeSearchState}
             selectPlayItem={props.selectPlayItem}
           />
-          <Lyrics lyrics={props.lyrics} />
+          {props.lyrics !== '' && <Lyrics lyrics={props.lyrics} />}
         </BarabomBlock>
       </BarabomWrap>
       <ComfortBlock className="right">

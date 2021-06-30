@@ -28,7 +28,7 @@ function BarabomContainer({
 
       // Playback status updates
       player.addListener('player_state_changed', (state: any) => {
-        console.log(state);
+        console.log(JSON.stringify(state));
         if (refCD.current) {
           if (state.paused) {
             refCD.current.classList.remove('play');

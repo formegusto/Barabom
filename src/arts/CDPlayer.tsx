@@ -4,6 +4,7 @@ import Spotify from '../assets/icon/Spotify_icon.png';
 import { SpinAni, TitleAni } from '../lib/animations/CDanimations';
 import musicutils from '../lib/musicutils';
 import { Item } from '../types/track';
+// import SpotifyWebPlayer from 'react-spotify-web-playback/lib';
 
 export type Props = {
   changeSearchState: (state: boolean) => void;
@@ -14,6 +15,12 @@ export type Props = {
 function CDPlayer(props: Props) {
   return (
     <CDPStage className="cdp">
+      {/* <SpotifyWebPlayer
+        token={process.env.REACT_APP_SPOTIFY_KEY!}
+        autoPlay
+        uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
+        play
+      /> */}
       <CDPBlock>
         {props.item && (
           <TrackTitleBlock>

@@ -155,7 +155,7 @@ const SearchHeader = styled.div`
 
   & > img {
     width: 200px;
-    height: auto;
+    height: 59.95px;
   }
 
   & > span {
