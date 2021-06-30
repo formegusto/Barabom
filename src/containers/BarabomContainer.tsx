@@ -57,12 +57,18 @@ function BarabomContainer({
     async (item: Item) => {
       setOnSearch(false);
       setPlayItem(item);
-      const response = await getAliases(item.artists[0].name);
-      const { aliases } = response.data.artists[0];
 
-      for (const aliase of aliases) {
-        const response = await getLyrics(aliase['sort-name'], item.name);
-        console.log(response);
+      const check = await getLyrics(item.artists[0].name, item.name);
+      console.log(check);
+      if (check.length === 0) {
+        const response = await getAliases(item.artists[0].name);
+        console.log(response.data.artists[0].aliases);
+        const { aliases } = response.data.artists[0];
+
+        for (const aliase of aliases) {
+          const response = await getLyrics(aliase['sort-name'], item.name);
+          console.log(response);
+        }
       }
 
       play({ spotify_uri: item.uri, device_id: player.device_id });
