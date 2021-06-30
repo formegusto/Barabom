@@ -10,15 +10,15 @@ type Props = SearchProps & CDPlayProps;
 function BarabomComponent(props: Props) {
   return (
     <Wrap>
-      <ComfortBlock>
+      <ComfortBlock className="left">
         <Line />
+        <Comfort>LOOK</Comfort>
       </ComfortBlock>
       <BarabomWrap>
         <TitleBlock>
           <BarabomTtitle>Barabom</BarabomTtitle>
           <Copyright>copyright © iamformegusto</Copyright>
         </TitleBlock>
-
         <BarabomBlock>
           <BarabomShadow />
           <CDPZone>
@@ -35,7 +35,8 @@ function BarabomComponent(props: Props) {
           />
         </BarabomBlock>
       </BarabomWrap>
-      <ComfortBlock>
+      <ComfortBlock className="right">
+        <Comfort>ONLY BEAUTY</Comfort>
         <Line />
       </ComfortBlock>
     </Wrap>
@@ -54,9 +55,42 @@ const Line = styled.div`
   background-color: #000;
 `;
 
+const Comfort = styled.h2`
+  font-style: normal;
+  font-weight: normal;
+
+  text-transform: uppercase;
+`;
+
 const ComfortBlock = styled.div`
   width: 500px;
   height: 500px;
+
+  padding: 1rem 0;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  &.left {
+    justify-content: flex-start;
+
+    & > h2 {
+      font-size: 64px;
+      line-height: 78px;
+      text-align: right;
+    }
+  }
+
+  &.right {
+    justify-content: flex-end;
+
+    & > h2 {
+      font-size: 48px;
+      line-height: 59px;
+    }
+  }
 `;
 
 const TitleBlock = styled.div`
