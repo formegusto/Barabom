@@ -70,15 +70,17 @@ function BarabomContainer({
       console.log(check);
       if (check.length === 0) {
         const response = await getAliases(item.artists[0].name);
-        console.log(response.data.artists[0].aliases);
-        const { aliases } = response.data.artists[0];
+        if (response.data.artists.length !== 0) {
+          console.log(response.data.artists[0].aliases);
+          const { aliases } = response.data.artists[0];
 
-        for (const aliase of aliases) {
-          check = await getLyrics(aliase['sort-name'], item.name);
-          console.log(check);
-          if (check.hasOwnProperty('lyrics')) {
-            setLyrics(check.lyrics.lyrics_body.replaceAll('\n', '<br/>'));
-            break;
+          for (const aliase of aliases) {
+            check = await getLyrics(aliase['sort-name'], item.name);
+            console.log(check);
+            if (check.hasOwnProperty('lyrics')) {
+              setLyrics(check.lyrics.lyrics_body.replaceAll('\n', '<br/>'));
+              break;
+            }
           }
         }
       } else {

@@ -9,6 +9,7 @@ import RootReducer from './stores';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSaga from 'redux-saga';
 import RootSaga from './stores/saga';
+import { getUser } from './stores/user/actions';
 
 const sagaMW = createSaga();
 const store = createStore(
@@ -16,6 +17,11 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMW)),
 );
 sagaMW.run(RootSaga);
+
+const loadUser = () => {
+  store.dispatch(getUser(process.env.REACT_APP_SPOTIFY_KEY!));
+};
+loadUser();
 
 ReactDOM.render(
   <Provider store={store}>
