@@ -10,6 +10,7 @@ type Props = SearchProps &
   CDPlayProps & {
     lyrics: string;
     splashOkay: boolean;
+    loading: boolean;
   };
 
 function BarabomComponent(props: Props) {
@@ -38,7 +39,7 @@ function BarabomComponent(props: Props) {
             changeSearchState={props.changeSearchState}
             selectPlayItem={props.selectPlayItem}
           />
-          {props.lyrics !== '' && <Lyrics lyrics={props.lyrics} />}
+          <Lyrics loading={props.loading} lyrics={props.lyrics} />
         </BarabomBlock>
       </BarabomWrap>
       <ComfortBlock className="right" splashOkay={props.splashOkay}>

@@ -1,13 +1,24 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import Spinner from './Spinner';
 
 type Props = {
   lyrics: any;
+  loading: boolean;
 };
 
 function Lyrics(props: Props) {
   return (
     <LyricsWrap>
-      <LyricsBlock dangerouslySetInnerHTML={{ __html: props.lyrics }} />
+      {props.loading ? (
+        <Spinner />
+      ) : (
+        props.lyrics !== '' && (
+          <LyricsBlock
+            dangerouslySetInnerHTML={{ __html: props.lyrics }}
+            loading={props.loading ? 'on' : 'off'}
+          />
+        )
+      )}
     </LyricsWrap>
   );
 }
@@ -23,7 +34,15 @@ const LyricsWrap = styled.div`
   align-items: center;
 `;
 
-const LyricsBlock = styled.div`
+const LyricsBlock = styled.div<{ loading: string }>`
+  ${(props) =>
+    props.loading === 'on' &&
+    css`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `}
+
   width: 240px;
   height: 100px;
 

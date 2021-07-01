@@ -14,6 +14,7 @@ function BarabomContainer({
 }: ConnectedProps<typeof SpotifyConnector>) {
   const [onSearch, setOnSearch] = useState<boolean>(false);
   const [playItem, setPlayItem] = useState<Item | null>(null);
+  const [loadingLyr, setLoadingLyr] = useState<boolean>(false);
   const [lyrics, setLyrics] = useState<string>('');
   const refCD = useRef<HTMLDivElement>(null);
 
@@ -61,11 +62,16 @@ function BarabomContainer({
     setOnSearch(state);
   }, []);
 
+  const changeLoading = useCallback((state: boolean) => {
+    setLoadingLyr(state);
+  }, []);
+
   const selectPlayItem = useCallback(
     async (item: Item) => {
       setOnSearch(false);
       setPlayItem(item);
 
+      changeLoading(true);
       let check = await getLyrics(item.artists[0].name, item.name);
       console.log(check);
       if (check.length === 0) {
@@ -86,10 +92,11 @@ function BarabomContainer({
       } else {
         setLyrics(check.lyrics.lyrics_body.replaceAll('\n', '<br/>'));
       }
+      changeLoading(false);
 
       play({ spotify_uri: item.uri, device_id: player.device_id });
     },
-    [play, player],
+    [play, player, changeLoading],
   );
 
   return (
@@ -103,6 +110,7 @@ function BarabomContainer({
         refCD={refCD}
         lyrics={lyrics}
         splashOkay={splashOkay}
+        loading={loadingLyr}
       />
     </>
   );
