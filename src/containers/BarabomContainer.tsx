@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { ConnectedProps } from 'react-redux';
 import { getAliases } from '../api/musicbrainz';
 import { getLyrics } from '../api/musixmatch';
+import Splash from '../atoms/Splash';
 import BarabomComponent from '../components/BarabomComponent';
 import SpotifyConnector from '../stores/spotify/connector';
 import { Item } from '../types/track';
@@ -15,6 +16,12 @@ function BarabomContainer({
   const [playItem, setPlayItem] = useState<Item | null>(null);
   const [lyrics, setLyrics] = useState<string>('');
   const refCD = useRef<HTMLDivElement>(null);
+
+  const [splashOkay, setSplayOkay] = useState<boolean>(false);
+
+  const okaySplash = useCallback(() => {
+    setSplayOkay(true);
+  }, []);
 
   useEffect(() => {
     (window as any).onSpotifyWebPlaybackSDKReady = () => {
@@ -84,14 +91,18 @@ function BarabomContainer({
   );
 
   return (
-    <BarabomComponent
-      onSearch={onSearch}
-      changeSearchState={changeSearchState}
-      item={playItem}
-      selectPlayItem={selectPlayItem}
-      refCD={refCD}
-      lyrics={lyrics}
-    />
+    <>
+      <Splash okaySplash={okaySplash} />
+      <BarabomComponent
+        onSearch={onSearch}
+        changeSearchState={changeSearchState}
+        item={playItem}
+        selectPlayItem={selectPlayItem}
+        refCD={refCD}
+        lyrics={lyrics}
+        splashOkay={splashOkay}
+      />
+    </>
   );
 }
 

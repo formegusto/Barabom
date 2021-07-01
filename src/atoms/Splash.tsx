@@ -1,37 +1,69 @@
 import { useEffect, useRef, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
-function Splash() {
+type Props = {
+  okaySplash: () => void;
+};
+
+function Splash(props: Props) {
   const [hiAni, setHiAni] = useState<boolean>(false);
   const refBall = useRef<HTMLDivElement>(null);
+  const refText = useRef<HTMLEmbedElement>(null);
+  const refScreen = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     refBall.current?.addEventListener('animationend', () => {
       setTimeout(() => setHiAni(true), 300);
     });
-  }, []);
+
+    refText.current?.addEventListener('animationend', () => {
+      console.log('refText animation end');
+      if (refScreen.current) {
+        refScreen.current.style.transform = 'translateY(100vh)';
+        props.okaySplash();
+      }
+    });
+  }, [props]);
 
   return (
-    <SplashBlock>
+    <SplashBlock ref={refScreen}>
       <Title hiAni={hiAni}>
-        <em className="hi">f</em>
+        <em className="hi" ref={refText}>
+          f
+        </em>
         <em className="first" ref={refBall}>
           o
         </em>
-        rmegust<em className="second">o</em>’s <em className="hi">C</em>reative{' '}
-        <em className="hi">R</em>
-        <em className="third">O</em>
-        <em className="fourth">O</em>M
+        rmegust<em className="second">o</em>’s <em className="hi">T</em>
+        <em className="third">O</em>Y <em className="hi">B</em>
+        <em className="fourth">O</em>X
       </Title>
     </SplashBlock>
   );
 }
 
 const SplashBlock = styled.div`
+  z-index: 255;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #fff;
+
   padding: 3rem;
   box-sizing: border-box;
 
   overflow-x: hidden;
+
+  transition: 0.7s;
 `;
 
 const BallAni = keyframes`
@@ -92,7 +124,7 @@ const Title = styled.h1<{ hiAni: boolean }>`
     props.hiAni &&
     css`
       & > .hi {
-        animation: ${SayHi} 0.7s infinite linear alternate;
+        animation: ${SayHi} 0.7s 4 linear alternate forwards;
       }
     `}
 `;

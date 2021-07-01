@@ -9,12 +9,13 @@ import Lyrics from '../atoms/Lyrics';
 type Props = SearchProps &
   CDPlayProps & {
     lyrics: string;
+    splashOkay: boolean;
   };
 
 function BarabomComponent(props: Props) {
   return (
     <Wrap>
-      <ComfortBlock className="left">
+      <ComfortBlock className="left" splashOkay={props.splashOkay}>
         <Line />
         <Comfort>LOOK</Comfort>
       </ComfortBlock>
@@ -40,7 +41,7 @@ function BarabomComponent(props: Props) {
           {props.lyrics !== '' && <Lyrics lyrics={props.lyrics} />}
         </BarabomBlock>
       </BarabomWrap>
-      <ComfortBlock className="right">
+      <ComfortBlock className="right" splashOkay={props.splashOkay}>
         <Comfort>ONLY BEAUTY</Comfort>
         <Line />
       </ComfortBlock>
@@ -54,6 +55,7 @@ const leftLineAni = keyframes`
     /* transform: rotateZ(-90deg); */
   } to {
     opacity:1;
+    transform: translateX(484px);
     /* transform: rotateZ(0deg); */
   }
 `;
@@ -61,10 +63,10 @@ const leftLineAni = keyframes`
 const rightLineAni = keyframes`
   from {
     opacity:0;
-    transform: rotateZ(-90deg);
+    transform: rotateZ(0deg);
   } to {
     opacity: 1;
-    transform: rotateZ(0deg);
+    transform: rotateZ(-90deg);
   }
 `;
 
@@ -87,7 +89,7 @@ const Comfort = styled.h2`
   text-transform: uppercase;
 `;
 
-const ComfortBlock = styled.div`
+const ComfortBlock = styled.div<{ splashOkay: boolean }>`
   position: relative;
   z-index: 10;
   width: 500px;
@@ -104,16 +106,19 @@ const ComfortBlock = styled.div`
     justify-content: flex-start;
 
     & > h2 {
+      padding: 0 1rem 0 0;
       font-size: 64px;
       line-height: 78px;
       text-align: right;
     }
 
-    ${css`
-      transform-origin: 100% 0%;
-      transform: translateX(484px);
-      /* animation: ${leftLineAni} 0.7s linear forwards; */
-    `}
+    ${(props) =>
+      props.splashOkay &&
+      css`
+        transform-origin: 100% 0%;
+
+        animation: ${leftLineAni} 0.7s linear forwards;
+      `}
   }
 
   &.right {
@@ -127,11 +132,12 @@ const ComfortBlock = styled.div`
       color: #999999;
     }
 
-    ${css`
-      transform-origin: 0% 100%;
-      transform: rotateZ(-90deg);
-      /* animation: ${rightLineAni} 0.7s linear forwards; */
-    `}
+    ${(props) =>
+      props.splashOkay &&
+      css`
+        transform-origin: 0% 100%;
+        animation: ${rightLineAni} 0.7s linear forwards;
+      `}
   }
 `;
 
@@ -142,7 +148,7 @@ const TitleBlock = styled.div`
 
   z-index: 1;
 
-  transform: translateX(-100px) translateY(-36px);
+  transform: translateX(-100px) translateY(-56px);
 
   & > * {
     text-align: right;
