@@ -11,11 +11,14 @@ type Props = {
 function ListItem({ item, selectPlayItem }: Props) {
   return (
     <ListBlock onClick={() => selectPlayItem(item)}>
-      <img
-        className="albumart"
-        src={item.album.images[0].url}
-        alt="albumarts"
-      ></img>
+      <div className="albumart-block">
+        <img
+          className="albumart"
+          src={item.album.images[0].url}
+          alt="albumarts"
+        ></img>
+        <div className="shadow" />
+      </div>
       <span></span>
       <span className="track">
         <h1 className="title">{item.name}</h1>
@@ -37,10 +40,26 @@ const ListBlock = styled.div`
   padding: 0.75rem 0;
   cursor: pointer;
 
-  & > img {
-    width: 64px;
-    height: 64px;
-    margin: 0 0.75rem 0 0;
+  & > .albumart-block {
+    position: relative;
+  }
+
+  & > .albumart-block > .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 72px;
+    height: 72px;
+
+    background-color: rgba(33, 33, 33, 0.1);
+  }
+
+  & img {
+    width: 72px;
+    height: 72px;
+    margin: 0 1rem 0 0;
+    object-fit: cover;
   }
 
   & > .track {

@@ -7,6 +7,7 @@ import musicutils from '../lib/musicutils';
 import { RootStore } from '../stores';
 import { userStore } from '../stores/user';
 import { Item } from '../types/track';
+import Spotify_Logo from '../assets/logo/Spotify_Logo_RGB_White.png';
 // import SpotifyWebPlayer from 'react-spotify-web-playback/lib';
 
 export type Props = {
@@ -20,47 +21,100 @@ function CDPlayer(props: Props) {
     ({ UserReducer }) => UserReducer,
   );
 
-  return (
-    user && (
-      <CDPStage className="cdp">
-        {/* <SpotifyWebPlayer
+  return user ? (
+    <CDPStage className="cdp">
+      {/* <SpotifyWebPlayer
         token={process.env.REACT_APP_SPOTIFY_KEY!}
         autoPlay
         uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
         play
       /> */}
-        <CDPBlock>
-          {props.item && (
-            <TrackTitleBlock>
-              <TrackTitle>{musicutils.getMusicAritst(props.item)}</TrackTitle>
-            </TrackTitleBlock>
-          )}
+      <CDPBlock>
+        {props.item && (
+          <TrackTitleBlock>
+            <TrackTitle>{musicutils.getMusicAritst(props.item)}</TrackTitle>
+          </TrackTitleBlock>
+        )}
 
-          <CDPTop className="realtop" />
-          <CDPFront className="top">
-            <CDTable onClick={() => props.changeSearchState(true)}>
-              <CDPin />
-              <CD ref={props.refCD}>
-                <AlbumArt
-                  src={props.item ? props.item.album.images[0].url : Spotify}
-                  alt="AlbumArt"
-                />
-              </CD>
-              <CDShadow />
-            </CDTable>
-          </CDPFront>
-          <CDPBack className="top" />
-          <CDPBottom className="bottom">
-            <CDPStick>
-              <CDPStickFront />
-              <CDPStickLeft />
-            </CDPStick>
-          </CDPBottom>
-        </CDPBlock>
-      </CDPStage>
-    )
+        <CDPTop className="realtop" />
+        <CDPFront className="top">
+          <CDTable onClick={() => props.changeSearchState(true)}>
+            <CDPin />
+            <CD ref={props.refCD}>
+              <AlbumArt
+                src={props.item ? props.item.album.images[0].url : Spotify}
+                alt="AlbumArt"
+              />
+            </CD>
+            <CDShadow />
+          </CDTable>
+        </CDPFront>
+        <CDPBack className="top" />
+        <CDPBottom className="bottom">
+          <CDPStick>
+            <CDPStickFront />
+            <CDPStickLeft />
+          </CDPStick>
+        </CDPBottom>
+      </CDPBlock>
+    </CDPStage>
+  ) : (
+    <LoginNotifyBlock>
+      <a
+        href={
+          process.env.NODE_ENV === 'production'
+            ? process.env.REACT_APP_SPOTIFY_AUTH_PRODUCTION!
+            : process.env.REACT_APP_SPOTIFY_AUTH!
+        }
+      >
+        <AuthButton>
+          <img src={Spotify_Logo} alt="logo" />
+        </AuthButton>
+      </a>
+      <Notify>Please Spotify Login</Notify>
+    </LoginNotifyBlock>
   );
 }
+
+const Notify = styled.h6`
+  margin: 6px 0 0;
+  font-size: 12px;
+
+  color: #999;
+`;
+const AuthButton = styled.div`
+  & > img {
+    display: block;
+
+    width: 150px;
+    height: 44.96px;
+    background-color: black;
+    padding: 8px;
+    border-radius: 2rem;
+
+    cursor: pointer;
+  }
+
+  &:hover {
+    & > img {
+      background-color: #666;
+    }
+  }
+`;
+
+const LoginNotifyBlock = styled.div`
+  position: relative;
+  z-index: 13;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+`;
 
 const TrackTitleBlock = styled.div`
   position: absolute;

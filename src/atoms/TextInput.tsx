@@ -22,14 +22,16 @@ const Input = styled.input<StyleProps>`
       display: block;
     `}
 
-  font-size: 2rem;
-  padding: 0.5rem;
+  font-size: 1.75rem;
+  padding: 0.75rem 1rem;
 
   color: #666;
   box-sizing: border-box;
   border-radius: 2rem;
-  border: 1px solid #ccc;
+  border: none;
   outline: none;
+
+  box-shadow: 2px 2px 10px #ccc;
 
   &::placeholder {
     color: #eee;

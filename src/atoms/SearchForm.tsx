@@ -58,27 +58,35 @@ function SearchForm({
 
   const nextQuery = useCallback(
     function (this: HTMLDivElement) {
-      console.log('next Query', tracks);
-      if (this.scrollTop >= this.scrollHeight - this.offsetHeight) {
+      /*
+      console.log('offset', this.offsetHeight);
+      console.log('scroll', this.scrollHeight);
+      console.log('client', this.clientHeight);
+      console.log('top', this.scrollTop);
+      */
+      if (this.scrollTop >= this.scrollHeight - this.offsetHeight - 80) {
+        console.log('next Query', tracks);
         if (tracks?.next) {
-          const nextObj = qs.parse(tracks.next.split('?')[1]) as any;
-          appendTracks({
-            q: nextObj.query,
-            offset: nextObj.offset,
-          });
+          if (!(loading[GET_TRACKS] || loading[GET_TRACKS_APPEND])) {
+            const nextObj = qs.parse(tracks.next.split('?')[1]) as any;
+            appendTracks({
+              q: nextObj.query,
+              offset: nextObj.offset,
+            });
+          }
         }
       }
     },
-    [tracks, appendTracks],
+    [tracks, appendTracks, loading],
   );
 
-  const debounceNextQuery = useRef(debounce(nextQuery, 500));
+  const debounceNextQuery = useRef(debounce(nextQuery, 300));
 
   const injectEventListener = useCallback(() => {
     if (refList.current)
       refList.current.removeEventListener('scroll', debounceNextQuery.current);
     if (refList.current) {
-      debounceNextQuery.current = debounce(nextQuery, 500);
+      debounceNextQuery.current = debounce(nextQuery, 300);
       refList.current.addEventListener('scroll', debounceNextQuery.current);
     }
   }, [nextQuery]);
@@ -97,7 +105,7 @@ function SearchForm({
         <TextInput
           value={query}
           onChange={onChange}
-          placeholder="Music"
+          placeholder="Search Music"
           block
         />
       </InputBlock>
