@@ -20,8 +20,10 @@ const store = createStore(
 sagaMW.run(RootSaga);
 
 const loadUser = () => {
-  const token = localStorage.getItem('access_token');
-  if (token) store.dispatch(getUser(token));
+  const access_token = localStorage.getItem('access_token');
+  const refresh_token = localStorage.getItem('refresh_token');
+  if (access_token && refresh_token)
+    store.dispatch(getUser({ access_token, refresh_token }));
 };
 loadUser();
 

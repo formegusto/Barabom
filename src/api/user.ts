@@ -34,4 +34,23 @@ const getToken = (code: string) =>
     },
   );
 
-export { getUser, getToken };
+const refreshToken = (token: string) =>
+  client.post(
+    `${account_url}/api/token`,
+    qs.stringify({
+      grant_type: 'refresh_token',
+      refresh_token: token,
+      client_id: process.env.REACT_APP_SPOTIFY_SECRET_ID,
+    }),
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      auth: {
+        username: process.env.REACT_APP_SPOTIFY_SECRET_ID!,
+        password: process.env.REACT_APP_SPOTIFY_SECRET_KEY!,
+      },
+    },
+  );
+
+export { getUser, getToken, refreshToken };

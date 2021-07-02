@@ -1,9 +1,13 @@
 import { createAction } from 'redux-actions';
 import { GET_USER } from './types';
 
-const getUser = createAction<string, string>(
+type Tokens = {
+  access_token: string;
+  refresh_token: string;
+};
+const getUser = createAction<Tokens, Tokens>(
   GET_USER,
-  (token: string) => token,
+  (token: Tokens) => token,
 );
 
 export { getUser };
