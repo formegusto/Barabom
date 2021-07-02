@@ -17,7 +17,11 @@ const getToken = (code: string) =>
     qs.stringify({
       code: code,
       grant_type: 'authorization_code',
-      redirect_uri: process.env.REACT_APP_SPOTIFY_CALLBACK,
+      redirect_uri:
+        process.env.NODE_ENV === 'production'
+          ? process.env.REACT_APP_SPOTIFY_CALLBACK_PRODUCTION!
+          : process.env.REACT_APP_SPOTIFY_CALLBACK!,
+      // redirect_uri: process.env.REACT_APP_SPOTIFY_CALLBACK,
     }),
     {
       headers: {
