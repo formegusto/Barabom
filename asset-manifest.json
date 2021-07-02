@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/project-barabom/static/css/main.24054b0b.chunk.css",
-    "main.js": "/project-barabom/static/js/main.448869ca.chunk.js",
-    "main.js.map": "/project-barabom/static/js/main.448869ca.chunk.js.map",
+    "main.js": "/project-barabom/static/js/main.8c27cdd9.chunk.js",
+    "main.js.map": "/project-barabom/static/js/main.8c27cdd9.chunk.js.map",
     "runtime-main.js": "/project-barabom/static/js/runtime-main.bd2346d3.js",
     "runtime-main.js.map": "/project-barabom/static/js/runtime-main.bd2346d3.js.map",
-    "static/js/2.b440baee.chunk.js": "/project-barabom/static/js/2.b440baee.chunk.js",
-    "static/js/2.b440baee.chunk.js.map": "/project-barabom/static/js/2.b440baee.chunk.js.map",
+    "static/js/2.c483e96c.chunk.js": "/project-barabom/static/js/2.c483e96c.chunk.js",
+    "static/js/2.c483e96c.chunk.js.map": "/project-barabom/static/js/2.c483e96c.chunk.js.map",
     "static/js/3.df4de82e.chunk.js": "/project-barabom/static/js/3.df4de82e.chunk.js",
     "static/js/3.df4de82e.chunk.js.map": "/project-barabom/static/js/3.df4de82e.chunk.js.map",
     "index.html": "/project-barabom/index.html",
     "static/css/main.24054b0b.chunk.css.map": "/project-barabom/static/css/main.24054b0b.chunk.css.map",
-    "static/js/2.b440baee.chunk.js.LICENSE.txt": "/project-barabom/static/js/2.b440baee.chunk.js.LICENSE.txt",
+    "static/js/2.c483e96c.chunk.js.LICENSE.txt": "/project-barabom/static/js/2.c483e96c.chunk.js.LICENSE.txt",
     "static/media/Spotify_Logo_RGB_Black.0d1e5545.png": "/project-barabom/static/media/Spotify_Logo_RGB_Black.0d1e5545.png",
     "static/media/Spotify_Logo_RGB_White.f48fb565.png": "/project-barabom/static/media/Spotify_Logo_RGB_White.f48fb565.png",
     "static/media/Spotify_icon.0e932c0a.png": "/project-barabom/static/media/Spotify_icon.0e932c0a.png",
@@ -19,8 +19,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.bd2346d3.js",
-    "static/js/2.b440baee.chunk.js",
+    "static/js/2.c483e96c.chunk.js",
     "static/css/main.24054b0b.chunk.css",
-    "static/js/main.448869ca.chunk.js"
+    "static/js/main.8c27cdd9.chunk.js"
   ]
 }
