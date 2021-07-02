@@ -2,7 +2,6 @@ import client from './client';
 import qs from 'qs';
 import Track from '../types/track';
 
-const token = process.env.REACT_APP_SPOTIFY_KEY;
 const url = process.env.REACT_APP_SPOTIFY_URL;
 
 const getTracks = ({ q, offset = 1 }: any) =>
@@ -16,7 +15,7 @@ const getTracks = ({ q, offset = 1 }: any) =>
     })}`,
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     },
   );
@@ -29,7 +28,7 @@ const play = ({ spotify_uri, device_id }: any) =>
     },
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         'Content-Type': 'application/json',
       },
     },

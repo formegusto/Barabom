@@ -46,6 +46,7 @@ function BarabomComponent(props: Props) {
         <Comfort>ONLY BEAUTY</Comfort>
         <Line />
       </ComfortBlock>
+      <a href={process.env.REACT_APP_SPOTIFY_AUTH}>spotify auth</a>
     </Wrap>
   );
 }

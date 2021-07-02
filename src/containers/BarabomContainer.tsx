@@ -26,7 +26,7 @@ function BarabomContainer({
 
   useEffect(() => {
     (window as any).onSpotifyWebPlaybackSDKReady = () => {
-      const token = `${process.env.REACT_APP_SPOTIFY_KEY}`;
+      const token = `${localStorage.getItem('access_token')}`;
       const player = new (window as any).Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: (cb: any) => {

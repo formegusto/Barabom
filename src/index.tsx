@@ -10,6 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSaga from 'redux-saga';
 import RootSaga from './stores/saga';
 import { getUser } from './stores/user/actions';
+import { HashRouter } from 'react-router-dom';
 
 const sagaMW = createSaga();
 const store = createStore(
@@ -19,13 +20,16 @@ const store = createStore(
 sagaMW.run(RootSaga);
 
 const loadUser = () => {
-  store.dispatch(getUser(process.env.REACT_APP_SPOTIFY_KEY!));
+  const token = localStorage.getItem('access_token');
+  if (token) store.dispatch(getUser(token));
 };
 loadUser();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <HashRouter>
+      <App />
+    </HashRouter>
   </Provider>,
   document.getElementById('root'),
 );
