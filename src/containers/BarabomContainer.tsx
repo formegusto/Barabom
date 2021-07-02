@@ -33,7 +33,6 @@ function BarabomContainer({
           cb(token);
         },
       });
-
       // Playback status updates
       player.addListener('player_state_changed', (state: any) => {
         console.log(JSON.stringify(state));
@@ -53,8 +52,29 @@ function BarabomContainer({
         injectPlayer(player);
       });
 
+      player.addListener('not_ready', ({ device_id }: any) => {
+        console.log('Device ID is not ready for playback', device_id);
+      });
+
       // Connect to the player!
       player.connect();
+
+      // Error Check
+      player.on('initialization_error', ({ message }: any) => {
+        console.error('Failed to initialize', message);
+      });
+
+      player.on('authentication_error', ({ message }: any) => {
+        console.error('Failed to authenticate', message);
+      });
+
+      player.on('account_error', ({ message }: any) => {
+        console.error('Failed to validate Spotify account', message);
+      });
+
+      player.on('playback_error', ({ message }: any) => {
+        console.error('Failed to perform playback', message);
+      });
     };
   }, [injectPlayer]);
 
@@ -72,26 +92,32 @@ function BarabomContainer({
       setPlayItem(item);
 
       changeLoading(true);
-      let check = await getLyrics(item.artists[0].name, item.name);
-      console.log(check);
-      if (check.length === 0) {
-        const response = await getAliases(item.artists[0].name);
-        if (response.data.artists.length !== 0) {
-          console.log(response.data.artists[0].aliases);
-          const { aliases } = response.data.artists[0];
 
-          for (const aliase of aliases) {
-            check = await getLyrics(aliase['sort-name'], item.name);
-            console.log(check);
-            if (check.hasOwnProperty('lyrics')) {
-              setLyrics(check.lyrics.lyrics_body.replaceAll('\n', '<br/>'));
-              break;
+      try {
+        let check = await getLyrics(item.artists[0].name, item.name);
+        console.log(check);
+        if (check.length === 0) {
+          const response = await getAliases(item.artists[0].name);
+          if (response.data.artists.length !== 0) {
+            console.log(response.data.artists[0].aliases);
+            const { aliases } = response.data.artists[0];
+
+            for (const aliase of aliases) {
+              check = await getLyrics(aliase['sort-name'], item.name);
+              console.log(check);
+              if (check.hasOwnProperty('lyrics')) {
+                setLyrics(check.lyrics.lyrics_body.replaceAll('\n', '<br/>'));
+                break;
+              }
             }
           }
+        } else {
+          setLyrics(check.lyrics.lyrics_body.replaceAll('\n', '<br/>'));
         }
-      } else {
-        setLyrics(check.lyrics.lyrics_body.replaceAll('\n', '<br/>'));
+      } catch (e) {
+        console.error(e);
       }
+
       changeLoading(false);
 
       play({ spotify_uri: item.uri, device_id: player.device_id });

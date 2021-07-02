@@ -1,7 +1,11 @@
 import styled, { keyframes } from 'styled-components';
 
-function Spinner() {
-  return <SpinnerDiv />;
+type Props = {
+  color?: string;
+};
+
+function Spinner(props: Props) {
+  return <SpinnerDiv {...props} />;
 }
 
 const ani = keyframes`
@@ -12,13 +16,13 @@ const ani = keyframes`
     }
 `;
 
-const SpinnerDiv = styled.div`
+const SpinnerDiv = styled.div<Props>`
   margin: 0 auto;
   width: 30px;
   height: 30px;
 
-  border: 5px solid #fff;
-  border-top: 5px solid #333;
+  border: 5px solid transparent;
+  border-top: 5px solid ${(props) => (props.color ? props.color : '#333')};
 
   border-radius: 100%;
   animation: ${ani} 1s infinite linear;

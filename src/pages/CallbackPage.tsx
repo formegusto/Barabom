@@ -18,7 +18,9 @@ function CallbackPage(props: RouteComponentProps) {
         localStorage.setItem('access_token', access_token);
         localStorage.setItem('refresh_token', refresh_token);
 
-        props.history.push('/');
+        setTimeout(() => {
+          window.location.href = process.env.PUBLIC_URL;
+        }, 3000);
       } catch (e) {
         console.error(e);
       }

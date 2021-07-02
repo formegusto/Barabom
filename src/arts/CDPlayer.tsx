@@ -1,8 +1,11 @@
 import { Ref } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Spotify from '../assets/icon/Spotify_icon.png';
 import { SpinAni, TitleAni } from '../lib/animations/CDanimations';
 import musicutils from '../lib/musicutils';
+import { RootStore } from '../stores';
+import { userStore } from '../stores/user';
 import { Item } from '../types/track';
 // import SpotifyWebPlayer from 'react-spotify-web-playback/lib';
 
@@ -13,43 +16,49 @@ export type Props = {
 };
 
 function CDPlayer(props: Props) {
+  const { user } = useSelector<RootStore, typeof userStore>(
+    ({ UserReducer }) => UserReducer,
+  );
+
   return (
-    <CDPStage className="cdp">
-      {/* <SpotifyWebPlayer
+    user && (
+      <CDPStage className="cdp">
+        {/* <SpotifyWebPlayer
         token={process.env.REACT_APP_SPOTIFY_KEY!}
         autoPlay
         uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
         play
       /> */}
-      <CDPBlock>
-        {props.item && (
-          <TrackTitleBlock>
-            <TrackTitle>{musicutils.getMusicAritst(props.item)}</TrackTitle>
-          </TrackTitleBlock>
-        )}
+        <CDPBlock>
+          {props.item && (
+            <TrackTitleBlock>
+              <TrackTitle>{musicutils.getMusicAritst(props.item)}</TrackTitle>
+            </TrackTitleBlock>
+          )}
 
-        <CDPTop className="realtop" />
-        <CDPFront className="top">
-          <CDTable onClick={() => props.changeSearchState(true)}>
-            <CDPin />
-            <CD ref={props.refCD}>
-              <AlbumArt
-                src={props.item ? props.item.album.images[0].url : Spotify}
-                alt="AlbumArt"
-              />
-            </CD>
-            <CDShadow />
-          </CDTable>
-        </CDPFront>
-        <CDPBack className="top" />
-        <CDPBottom className="bottom">
-          <CDPStick>
-            <CDPStickFront />
-            <CDPStickLeft />
-          </CDPStick>
-        </CDPBottom>
-      </CDPBlock>
-    </CDPStage>
+          <CDPTop className="realtop" />
+          <CDPFront className="top">
+            <CDTable onClick={() => props.changeSearchState(true)}>
+              <CDPin />
+              <CD ref={props.refCD}>
+                <AlbumArt
+                  src={props.item ? props.item.album.images[0].url : Spotify}
+                  alt="AlbumArt"
+                />
+              </CD>
+              <CDShadow />
+            </CDTable>
+          </CDPFront>
+          <CDPBack className="top" />
+          <CDPBottom className="bottom">
+            <CDPStick>
+              <CDPStickFront />
+              <CDPStickLeft />
+            </CDPStick>
+          </CDPBottom>
+        </CDPBlock>
+      </CDPStage>
+    )
   );
 }
 
