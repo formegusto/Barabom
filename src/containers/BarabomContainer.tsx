@@ -11,6 +11,7 @@ function BarabomContainer({
   play,
   player,
   injectPlayer,
+  user,
 }: ConnectedProps<typeof SpotifyConnector>) {
   const [onSearch, setOnSearch] = useState<boolean>(false);
   const [playItem, setPlayItem] = useState<Item | null>(null);
@@ -25,58 +26,65 @@ function BarabomContainer({
   }, []);
 
   useEffect(() => {
-    (window as any).onSpotifyWebPlaybackSDKReady = () => {
-      const token = `${localStorage.getItem('access_token')}`;
-      const player = new (window as any).Spotify.Player({
-        name: 'Web Playback SDK Quick Start Player',
-        getOAuthToken: (cb: any) => {
-          cb(token);
-        },
-      });
-      // Playback status updates
-      player.addListener('player_state_changed', (state: any) => {
-        console.log(JSON.stringify(state));
-        if (refCD.current) {
-          if (state.paused) {
-            refCD.current.classList.remove('play');
-            setPlayItem(null);
-          } else refCD.current.classList.add('play');
-        }
-      });
+    if (user) {
+      (window as any).onSpotifyWebPlaybackSDKReady = () => {
+        const token = `${localStorage.getItem('access_token')}`;
+        const player = new (window as any).Spotify.Player({
+          name: 'Web Playback SDK Quick Start Player',
+          getOAuthToken: (cb: any) => {
+            cb(token);
+          },
+        });
+        // Playback status updates
+        player.addListener('player_state_changed', (state: any) => {
+          console.log(JSON.stringify(state));
+          if (refCD.current) {
+            if (state.paused) {
+              refCD.current.classList.remove('play');
+              setPlayItem(null);
+            } else refCD.current.classList.add('play');
+          }
+        });
 
-      // Ready
-      player.addListener('ready', ({ device_id }: any) => {
-        console.log('Ready with Device ID', device_id);
+        // Ready
+        player.addListener('ready', ({ device_id }: any) => {
+          console.log('Ready with Device ID', device_id);
 
-        player.device_id = device_id;
-        injectPlayer(player);
-      });
+          player.device_id = device_id;
+          injectPlayer(player);
+        });
 
-      player.addListener('not_ready', ({ device_id }: any) => {
-        console.log('Device ID is not ready for playback', device_id);
-      });
+        player.addListener('not_ready', ({ device_id }: any) => {
+          console.log('Device ID is not ready for playback', device_id);
+        });
 
-      // Connect to the player!
-      player.connect();
+        // Connect to the player!
+        player.connect();
 
-      // Error Check
-      player.on('initialization_error', ({ message }: any) => {
-        console.error('Failed to initialize', message);
-      });
+        // Error Check
+        player.on('initialization_error', ({ message }: any) => {
+          console.error('Failed to initialize', message);
+        });
 
-      player.on('authentication_error', ({ message }: any) => {
-        console.error('Failed to authenticate', message);
-      });
+        player.on('authentication_error', ({ message }: any) => {
+          console.error('Failed to authenticate', message);
+        });
 
-      player.on('account_error', ({ message }: any) => {
-        console.error('Failed to validate Spotify account', message);
-      });
+        player.on('account_error', ({ message }: any) => {
+          console.error('Failed to validate Spotify account', message);
+        });
 
-      player.on('playback_error', ({ message }: any) => {
-        console.error('Failed to perform playback', message);
-      });
-    };
-  }, [injectPlayer]);
+        player.on('playback_error', ({ message }: any) => {
+          console.error('Failed to perform playback', message);
+        });
+      };
+
+      const script = document.createElement('script');
+      script.src = 'https://sdk.scdn.co/spotify-player.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, [injectPlayer, user]);
 
   const changeSearchState = useCallback((state: boolean) => {
     setOnSearch(state);
