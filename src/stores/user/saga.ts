@@ -21,10 +21,10 @@ function* getUserSaga(action: ReturnType<typeof getUser>) {
     });
   } catch (e) {
     const msg = e.response.data.error.message;
-    if (action.payload.refresh_token === 'undefined')
-      throw new Error('Need a New Login');
     if (msg === 'The access token expired') {
       try {
+        if (action.payload.refresh_token === 'undefined')
+          throw new Error('Need a New Login');
         let response: AxiosResponse<User | any> = yield userApi.refreshToken(
           action.payload.refresh_token,
         );
@@ -39,6 +39,8 @@ function* getUserSaga(action: ReturnType<typeof getUser>) {
           payload: response.data,
         });
       } catch (e) {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
         yield put<SagaAction<User | any>>({
           type: GET_USER_FAILURE,
           payload: e,
