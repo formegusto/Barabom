@@ -6,7 +6,7 @@ import UserReducer from './user';
 const RootReducer = combineReducers({
   SpotifyReducer,
   LoadingReducer,
-  UserReducer,
+  // UserReducer,
 });
 
 export type RootStore = ReturnType<typeof RootReducer>;
