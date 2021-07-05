@@ -34,6 +34,10 @@ const LyricsWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 50%;
+  }
 `;
 
 const LyricsBlock = styled.div`

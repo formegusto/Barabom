@@ -143,6 +143,11 @@ const SearchBlock = styled.div<{ isOn: boolean }>`
     css`
       transform: translateY(10px);
     `}
+
+  @media ${({ theme }) => theme.device.mobile} {
+    left: 0;
+    width: 100%;
+  }
 `;
 
 const InputBlock = styled.div`

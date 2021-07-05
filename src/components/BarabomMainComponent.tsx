@@ -60,6 +60,11 @@ const TitleBlock = styled.div`
   right: 0;
   z-index: 1;
 
+  @media ${({ theme }) => theme.device.mobile} {
+    position: static;
+    margin: 0 1rem 0 0;
+  }
+
   & > * {
     text-align: right;
   }
@@ -93,6 +98,10 @@ const BarabomWrap = styled.div`
   position: relative;
 
   width: 500px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100vw;
+  }
 `;
 
 const BarabomBlock = styled.div`
@@ -106,6 +115,10 @@ const BarabomBlock = styled.div`
   background-size: cover;
 
   overflow: hidden;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+  }
 `;
 
 const CDPZone = styled.div`
@@ -119,10 +132,20 @@ const CDPZone = styled.div`
 
   background: white;
 
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+  }
+
   & > .cdp {
     position: absolute;
     top: 125px;
-    /* left: calc(50% - 70px); */
+    left: calc(50% - 50px);
+
+    @media ${({ theme }) => theme.device.mobile} {
+      top: 100px;
+      left: calc(50% - 50px);
+      width: 100%;
+    }
   }
 `;
 

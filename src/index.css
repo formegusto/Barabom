@@ -140,3 +140,10 @@ body {
   min-height: 700px;
   font-family: 'Montserrat', sans-serif;
 }
+
+@media screen and (max-width: 428px) {
+  body {
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+}

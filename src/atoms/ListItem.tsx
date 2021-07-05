@@ -63,6 +63,9 @@ const ListBlock = styled.div`
   }
 
   & > .track {
+    padding: 0 0.5rem 0 0;
+    box-sizing: border-box;
+    word-break: break-all;
     flex: 1;
 
     & > .title {

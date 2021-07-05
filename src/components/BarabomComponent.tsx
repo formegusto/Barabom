@@ -183,6 +183,11 @@ const BarabomWrap = styled.div`
 
   width: 500px;
   height: 500px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const BarabomBlock = styled.div`
@@ -193,6 +198,11 @@ const BarabomBlock = styled.div`
 
   width: 500px;
   height: 500px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+    height: 100%;
+  }
 
   background-image: url(${keonu});
   background-repeat: no-repeat;
