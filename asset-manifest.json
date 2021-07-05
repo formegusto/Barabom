@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/project-barabom/static/css/main.24054b0b.chunk.css",
-    "main.js": "/project-barabom/static/js/main.f39b91c7.chunk.js",
-    "main.js.map": "/project-barabom/static/js/main.f39b91c7.chunk.js.map",
+    "main.css": "/project-barabom/static/css/main.a21abef0.chunk.css",
+    "main.js": "/project-barabom/static/js/main.f55cb480.chunk.js",
+    "main.js.map": "/project-barabom/static/js/main.f55cb480.chunk.js.map",
     "runtime-main.js": "/project-barabom/static/js/runtime-main.57293e23.js",
     "runtime-main.js.map": "/project-barabom/static/js/runtime-main.57293e23.js.map",
     "static/js/2.efdebcea.chunk.js": "/project-barabom/static/js/2.efdebcea.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.954186df.chunk.js": "/project-barabom/static/js/3.954186df.chunk.js",
     "static/js/3.954186df.chunk.js.map": "/project-barabom/static/js/3.954186df.chunk.js.map",
     "index.html": "/project-barabom/index.html",
-    "static/css/main.24054b0b.chunk.css.map": "/project-barabom/static/css/main.24054b0b.chunk.css.map",
+    "static/css/main.a21abef0.chunk.css.map": "/project-barabom/static/css/main.a21abef0.chunk.css.map",
     "static/js/2.efdebcea.chunk.js.LICENSE.txt": "/project-barabom/static/js/2.efdebcea.chunk.js.LICENSE.txt",
     "static/media/Spotify_Logo_RGB_Black.0d1e5545.png": "/project-barabom/static/media/Spotify_Logo_RGB_Black.0d1e5545.png",
     "static/media/Spotify_Logo_RGB_White.f48fb565.png": "/project-barabom/static/media/Spotify_Logo_RGB_White.f48fb565.png",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.57293e23.js",
     "static/js/2.efdebcea.chunk.js",
-    "static/css/main.24054b0b.chunk.css",
-    "static/js/main.f39b91c7.chunk.js"
+    "static/css/main.a21abef0.chunk.css",
+    "static/js/main.f55cb480.chunk.js"
   ]
 }
