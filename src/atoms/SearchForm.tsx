@@ -105,7 +105,7 @@ function SearchForm({
         <TextInput
           value={query}
           onChange={onChange}
-          placeholder="Search Music"
+          placeholder="Barabom Only Beauty"
           block
         />
       </InputBlock>

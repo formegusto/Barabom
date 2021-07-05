@@ -1,7 +1,8 @@
-import BarabomContainer from '../containers/BarabomContainer';
+// import BarabomContainer from '../containers/BarabomContainer';
+import BarabomMainContainer from '../containers/BarabomMainContainer';
 
 function BarabomPage() {
-  return <BarabomContainer />;
+  return <BarabomMainContainer />;
 }
 
 export default BarabomPage;

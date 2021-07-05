@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Spinner from './Spinner';
 
 type Props = {
@@ -13,10 +13,7 @@ function Lyrics(props: Props) {
         <Spinner />
       ) : (
         props.lyrics !== '' && (
-          <LyricsBlock
-            dangerouslySetInnerHTML={{ __html: props.lyrics }}
-            loading={props.loading ? 'on' : 'off'}
-          />
+          <LyricsBlock dangerouslySetInnerHTML={{ __html: props.lyrics }} />
         )
       )}
     </LyricsWrap>
@@ -24,36 +21,36 @@ function Lyrics(props: Props) {
 }
 
 const LyricsWrap = styled.div`
-  position: relative;
+  position: absolute;
+  bottom: 150px;
+
   z-index: 13;
 
   flex: 1;
+
+  width: 240px;
+  height: 100px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const LyricsBlock = styled.div<{ loading: string }>`
-  ${(props) =>
-    props.loading === 'on' &&
-    css`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    `}
+const LyricsBlock = styled.div`
+  padding: 0.5rem 0;
 
-  width: 240px;
-  height: 100px;
+  box-sizing: border-box;
 
-  overflow-y: scroll;
   text-align: center;
 
   font-size: 12px;
   line-height: 16px;
-  color: #fff;
+  color: #333;
 
-  text-shadow: 1px 1px 10px #333;
+  width: 100%;
+  height: 100%;
+
+  overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
