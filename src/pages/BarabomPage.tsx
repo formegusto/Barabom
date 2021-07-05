@@ -1,4 +1,3 @@
-// import BarabomContainer from '../containers/BarabomContainer';
 import BarabomMainContainer from '../containers/BarabomMainContainer';
 
 function BarabomPage() {

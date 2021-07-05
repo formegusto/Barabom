@@ -87,10 +87,17 @@ const SayHi = keyframes`
 const Title = styled.h1<{ hiAni: boolean }>`
   font-style: normal;
   font-weight: 300;
+  text-transform: uppercase;
+
   font-size: 32px;
   line-height: 40px;
   letter-spacing: 0.2em;
-  text-transform: uppercase;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 0.2em;
+  }
 
   & > em {
     display: inline-block;

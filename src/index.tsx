@@ -11,6 +11,8 @@ import createSaga from 'redux-saga';
 import RootSaga from './stores/saga';
 import { getUser } from './stores/user/actions';
 import { HashRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/theme';
 
 const sagaMW = createSaga();
 const store = createStore(
@@ -28,11 +30,13 @@ const loadUser = () => {
 loadUser();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </Provider>
+  </ThemeProvider>,
   document.getElementById('root'),
 );
 

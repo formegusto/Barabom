@@ -4,6 +4,7 @@ import SearchForm from '../atoms/SearchForm';
 import { Props as SearchProps } from '../atoms/SearchForm';
 import { Props as CDPlayProps } from '../arts/CDPlayer';
 import Lyrics from '../atoms/Lyrics';
+import { MobileView } from 'react-device-detect';
 
 type Props = SearchProps &
   CDPlayProps & {
@@ -18,6 +19,9 @@ function BarabomMainComponent(props: Props) {
       <TitleBlock>
         <BarabomTtitle>Barabom</BarabomTtitle>
         <Copyright>copyright © iamformegusto</Copyright>
+        <MobileView>
+          <MobileNotSupported>Mobile not supported</MobileNotSupported>
+        </MobileView>
       </TitleBlock>
       <BarabomBlock>
         <CDPZone>
@@ -37,6 +41,18 @@ function BarabomMainComponent(props: Props) {
     </BarabomWrap>
   );
 }
+
+const MobileNotSupported = styled.h6`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 10px;
+  color: #ccc;
+  margin: 0.25rem 0;
+  /* identical to box height */
+
+  text-transform: lowercase;
+`;
 
 const TitleBlock = styled.div`
   position: absolute;
