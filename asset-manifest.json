@@ -1,25 +1,26 @@
 {
   "files": {
     "main.css": "/project-barabom/static/css/main.a21abef0.chunk.css",
-    "main.js": "/project-barabom/static/js/main.f55cb480.chunk.js",
-    "main.js.map": "/project-barabom/static/js/main.f55cb480.chunk.js.map",
-    "runtime-main.js": "/project-barabom/static/js/runtime-main.57293e23.js",
-    "runtime-main.js.map": "/project-barabom/static/js/runtime-main.57293e23.js.map",
-    "static/js/2.efdebcea.chunk.js": "/project-barabom/static/js/2.efdebcea.chunk.js",
-    "static/js/2.efdebcea.chunk.js.map": "/project-barabom/static/js/2.efdebcea.chunk.js.map",
-    "static/js/3.954186df.chunk.js": "/project-barabom/static/js/3.954186df.chunk.js",
-    "static/js/3.954186df.chunk.js.map": "/project-barabom/static/js/3.954186df.chunk.js.map",
+    "main.js": "/project-barabom/static/js/main.42db9d42.chunk.js",
+    "main.js.map": "/project-barabom/static/js/main.42db9d42.chunk.js.map",
+    "runtime-main.js": "/project-barabom/static/js/runtime-main.bd2346d3.js",
+    "runtime-main.js.map": "/project-barabom/static/js/runtime-main.bd2346d3.js.map",
+    "static/js/2.a46ab662.chunk.js": "/project-barabom/static/js/2.a46ab662.chunk.js",
+    "static/js/2.a46ab662.chunk.js.map": "/project-barabom/static/js/2.a46ab662.chunk.js.map",
+    "static/js/3.df4de82e.chunk.js": "/project-barabom/static/js/3.df4de82e.chunk.js",
+    "static/js/3.df4de82e.chunk.js.map": "/project-barabom/static/js/3.df4de82e.chunk.js.map",
     "index.html": "/project-barabom/index.html",
     "static/css/main.a21abef0.chunk.css.map": "/project-barabom/static/css/main.a21abef0.chunk.css.map",
-    "static/js/2.efdebcea.chunk.js.LICENSE.txt": "/project-barabom/static/js/2.efdebcea.chunk.js.LICENSE.txt",
+    "static/js/2.a46ab662.chunk.js.LICENSE.txt": "/project-barabom/static/js/2.a46ab662.chunk.js.LICENSE.txt",
     "static/media/Spotify_Logo_RGB_Black.0d1e5545.png": "/project-barabom/static/media/Spotify_Logo_RGB_Black.0d1e5545.png",
     "static/media/Spotify_Logo_RGB_White.f48fb565.png": "/project-barabom/static/media/Spotify_Logo_RGB_White.f48fb565.png",
-    "static/media/Spotify_icon.0e932c0a.png": "/project-barabom/static/media/Spotify_icon.0e932c0a.png"
+    "static/media/Spotify_icon.0e932c0a.png": "/project-barabom/static/media/Spotify_icon.0e932c0a.png",
+    "static/media/keonu.12f6d4e1.jpg": "/project-barabom/static/media/keonu.12f6d4e1.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.57293e23.js",
-    "static/js/2.efdebcea.chunk.js",
+    "static/js/runtime-main.bd2346d3.js",
+    "static/js/2.a46ab662.chunk.js",
     "static/css/main.a21abef0.chunk.css",
-    "static/js/main.f55cb480.chunk.js"
+    "static/js/main.42db9d42.chunk.js"
   ]
 }
