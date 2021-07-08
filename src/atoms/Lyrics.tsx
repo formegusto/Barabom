@@ -21,8 +21,9 @@ function Lyrics(props: Props) {
 }
 
 const LyricsWrap = styled.div`
-  position: absolute;
-  bottom: 150px;
+  /* position: absolute;
+  bottom: 150px; */
+  transform: translateY(150px);
 
   z-index: 13;
 
@@ -49,7 +50,9 @@ const LyricsBlock = styled.div`
 
   font-size: 12px;
   line-height: 16px;
-  color: #333;
+  /* color: #333; */
+  color: #fff;
+  text-shadow: 2px 2px 4px #666;
 
   width: 100%;
   height: 100%;
