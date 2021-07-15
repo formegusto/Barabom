@@ -22,13 +22,13 @@ const store = createStore(
 sagaMW.run(RootSaga);
 
 const loadUser = () => {
-  const access_token = process.env.REACT_APP_SPOTIFY_KEY!;
-  const refresh_token = process.env.REACT_APP_SPOTIFY_REFRESH_KEY!;
-  localStorage.setItem('access_token', access_token);
-  localStorage.setItem('refresh_token', refresh_token);
+  // const access_token = process.env.REACT_APP_SPOTIFY_KEY!;
+  // const refresh_token = process.env.REACT_APP_SPOTIFY_REFRESH_KEY!;
+  // localStorage.setItem('access_token', access_token);
+  // localStorage.setItem('refresh_token', refresh_token);
 
-  // const access_token = localStorage.getItem('access_token');
-  // const refresh_token = localStorage.getItem('refresh_token');
+  const access_token = localStorage.getItem('access_token');
+  const refresh_token = localStorage.getItem('refresh_token');
   if (access_token && refresh_token)
     store.dispatch(getUser({ access_token, refresh_token }));
 };

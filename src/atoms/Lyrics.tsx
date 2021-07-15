@@ -21,9 +21,9 @@ function Lyrics(props: Props) {
 }
 
 const LyricsWrap = styled.div`
-  /* position: absolute;
-  bottom: 150px; */
-  transform: translateY(150px);
+  position: absolute;
+  bottom: 150px;
+  /* transform: translateY(150px); */
 
   z-index: 13;
 
