@@ -1,6 +1,6 @@
 # Barabom
 
-![Barabom%20291e7e0bd9ef4f6ea46fda353cc9e335/Untitled.png](Barabom%20291e7e0bd9ef4f6ea46fda353cc9e335/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/52296323/134373623-68a1d0a4-6819-4bb9-a575-6242891971c4.png)
 
 > "**아름다운 것만 보세요.", "Look Only Beauty." From. Barabom**
 
@@ -29,27 +29,27 @@
 
 > Splash Page
 
-![Untitled](Barabom%20291e7e0bd9ef4f6ea46fda353cc9e335/Untitled%201.png)
+![Untitled 1](https://user-images.githubusercontent.com/52296323/134373646-dfed79a2-c2c1-4c23-ae2f-1d3c43158e54.png)
 
 > Main Page (Unauth)
 
-![Untitled](Barabom%20291e7e0bd9ef4f6ea46fda353cc9e335/Untitled%202.png)
+![Untitled 2](https://user-images.githubusercontent.com/52296323/134373658-2956919a-35bc-4eb0-accb-c70b69caa434.png)
 
 > OAuth Callback Page
 
-![Untitled](Barabom%20291e7e0bd9ef4f6ea46fda353cc9e335/Untitled%203.png)
+![Untitled 3](https://user-images.githubusercontent.com/52296323/134373669-e752f22e-8c8e-4eeb-bb2b-27e4b8e79245.png)
 
 > Main Page (Auth)
 
-![Untitled](Barabom%20291e7e0bd9ef4f6ea46fda353cc9e335/Untitled%204.png)
+![Untitled 4](https://user-images.githubusercontent.com/52296323/134373676-f51db6f9-6ec5-4d7a-a376-d1ee28537d62.png)
 
 > Music Find Modal
 
-![Untitled](Barabom%20291e7e0bd9ef4f6ea46fda353cc9e335/Untitled%205.png)
+![Untitled 5](https://user-images.githubusercontent.com/52296323/134373689-2bece929-968a-4a41-b14d-af33127d51af.png)
 
 > Main Page (Playmusic)
 
-![Untitled](Barabom%20291e7e0bd9ef4f6ea46fda353cc9e335/Untitled%206.png)
+![Untitled 6](https://user-images.githubusercontent.com/52296323/134373701-63d65aaf-0e59-4ff0-9e5b-d95313a6e9cc.png)
 
 # 4. Use APIs
 
@@ -165,7 +165,7 @@ const play = ({ spotify_uri, device_id }: any) =>
 
 - **Spotify에서는 가사를 제공하는 API가 존재하지 않았다.** 가사 API를 꼭 써보고 싶었는데, 이것저것 찾던 중, **Spotify는 Musixmatch 라는 가사제공업체에서 가사를 제공받아 사용함**을 알게 됐다.
 
-![Untitled](Barabom%20291e7e0bd9ef4f6ea46fda353cc9e335/Untitled%207.png)
+![Untitled 7](https://user-images.githubusercontent.com/52296323/134373732-be05b4b7-c2a0-4796-91fa-8082175eb6bb.png)
 
 - 때문에, Musixmatch API를 알아보게 되었는데, 여기서 API를 제공해주고 있었다. 하지만 전체 가사를 제공받으려면 일정 금액을 지불해야 한다. 울며 겨자먹기로 무료로 일부 가사만 제공받는 것으로 만족하기로 했다.
 
