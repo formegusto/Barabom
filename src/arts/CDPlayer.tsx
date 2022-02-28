@@ -8,6 +8,7 @@ import { RootStore } from '../stores';
 import { userStore } from '../stores/user';
 import { Item } from '../types/track';
 import Spotify_Logo from '../assets/logo/Spotify_Logo_RGB_White.png';
+import qs from 'qs';
 // import SpotifyWebPlayer from 'react-spotify-web-playback/lib';
 
 export type Props = {
@@ -62,9 +63,14 @@ function CDPlayer(props: Props) {
     <LoginNotifyBlock>
       <a
         href={
-          process.env.NODE_ENV === 'production'
-            ? process.env.REACT_APP_SPOTIFY_AUTH_PRODUCTION!
-            : process.env.REACT_APP_SPOTIFY_AUTH!
+          'https://accounts.spotify.com/authorize?' +
+          qs.stringify({
+            response_type: 'code',
+            client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
+            scope: 'user-read-private user-read-email',
+            redirect_uri: process.env.REACT_APP_SPOTIFY_CALLBACK,
+            state: 'test',
+          })
         }
       >
         <AuthButton>

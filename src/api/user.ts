@@ -28,7 +28,7 @@ const getToken = (code: string) =>
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       auth: {
-        username: process.env.REACT_APP_SPOTIFY_SECRET_ID!,
+        username: process.env.REACT_APP_SPOTIFY_CLIENT_ID!,
         password: process.env.REACT_APP_SPOTIFY_SECRET_KEY!,
       },
     },

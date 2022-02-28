@@ -1,6 +1,6 @@
 {
-  "homepage": "https://formegusto.github.io/project-barabom",
-  "name": "project-barabom",
+  "homepage": "https://formegusto.github.io/barabom",
+  "name": "barabom",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
